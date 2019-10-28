@@ -46,6 +46,10 @@ html, body {
   line-height: 135%;
   letter-spacing: 0.01em;
   color: white;
+  font-size: 18px;
+  @media screen and (min-width: 768px) {
+    font-size: 21px;
+  }
 }
 
 .script {
@@ -53,10 +57,13 @@ html, body {
 }
 
 h1 {
-  font-size: 6vw;
   text-align: center;
   line-height: 1.1;
   text-shadow: 0px 5px 3px black;
+  font-size: 15.5vw;
+  @media screen and (min-width: 768px) {
+    font-size: 6vw;
+  }
 }
 h2 {
   font-size: 1vw;
@@ -68,9 +75,12 @@ h2 {
 }
 
 h3 {
-  font-size: 6vw;
   margin: 0 0 0 0;
   line-height: 1;
+  font-size: 14vw;
+  @media screen and (min-width: 768px) {
+    font-size: 6vw;
+  }
 }
 
 .indent {
@@ -88,5 +98,8 @@ a, a:link, a:visited, a:active, a:hover {
 p {
   font-size: 21px;
   line-height: 1.25;
-  max-width: 40em;
+  max-width: calc(100% - 3rem);
+  @media screen and (min-width: 768px) {
+    max-width: 40em;
+  }
 }

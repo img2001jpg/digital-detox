@@ -5,7 +5,7 @@ $cirleWidth: 4px;
 #map {
   width: 100vw;
   height: 100vh;
-  // overflow: hidden;
+  overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
@@ -16,7 +16,7 @@ $cirleWidth: 4px;
     opacity: 1;
   }
 }
-.mapboxgl-ctrl-logo, .mapboxgl-ctrl-attrib-inner {
+.mapboxgl-ctrl-logo, .mapboxgl-ctrl-attrib-inner, .mapboxgl-popup-close-button {
   display: none !important;
 }
 .mapboxgl-marker {
@@ -45,6 +45,20 @@ $cirleWidth: 4px;
     left: 50%;
     opacity: 0;
     transform: translate(-50%, -50%);
+  }
+}
+.mapboxgl-popup {
+  .mapboxgl-popup-tip {
+    display: none;
+  }
+  .mapboxgl-popup-content {
+    background: none;
+    font-family: 'Times New Roman', Times, serif;
+    text-shadow: 0px 2px 2px black,
+                 0px 2px 2px black,
+                 0px 2px 2px black;
+    font-size: 1rem;
+    margin-top: .75em;
   }
 }
 .is-scrolling .mapboxgl-marker {

@@ -1,6 +1,9 @@
 
 export default {
   mode: 'spa',
+  server: {
+    host: '0.0.0.0' // default: localhost
+  },
   head: {
     title: 'Digital Detox — Marco Land',
     meta: [

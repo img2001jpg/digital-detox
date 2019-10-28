@@ -34,8 +34,8 @@
     </svg>
     <svg
       v-else
-      width="38px"
-      height="40px"
+      width="35px"
+      height="37px"
       viewBox="0 0 38 40"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"

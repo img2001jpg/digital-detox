@@ -1,6 +1,9 @@
 <template>
   <div
     id="map"
+    :style="{
+      height: windowHeight + 'px'
+    }"
     :class="{
       'visible': $store.state.mapLoaded,
       'is-scrolling': isScrolling,
@@ -34,7 +37,11 @@
       <MglMarker
         :coordinates.sync="coordinates"
         color="blue"
-      />
+      >
+      </MglMarker>
+      <transition name="fade">
+        <div class="speed-meter" v-if="isScrolling && currentSpeed > 0 && !$store.state.showAbout && !$store.state.noEvents">{{ currentSpeed }} km/h</div>
+      </transition>
       <ProgressBar
         :class="{
           'visible': !$store.state.noEvents && !$store.state.showAbout
@@ -68,6 +75,7 @@ export default {
   },
   data () {
     return {
+      windowHeight: null,
       connected: false,
       minZoom: 6,
       maxZoom: 18,
@@ -75,6 +83,7 @@ export default {
       bearing: 45,
       zoom: 16,
       interactive: true,
+      showPopup: true,
       accessToken: 'pk.eyJ1IjoiaW1nMjAwMSIsImEiOiJjamZnejh1OGIyZmh0MnptaWhvOGdrdjh4In0.COQxneZDAQIPys3psF0ehw',
       mapStyle: 'mapbox://styles/img2001/ck0tn5ow313551cm6e101b31b',
       coordinates: [-1.2357903, 43.1634167],
@@ -82,6 +91,9 @@ export default {
       // aboutCoordinates: [-5.8412128, 44.3750478],
       aboutCoordinates: [-1.6874461, 43.0524282],
       currentDistance: 0,
+      currentSpeed: null,
+      lastScrollTime: null,
+      oldVal: 0,
       mapActions: null,
       isScrolling: false,
       isTransitioning: false,
@@ -116,6 +128,37 @@ export default {
     },
     fullDistance () {
       return turf.length(this.lineStr, { units: 'kilometres' })
+    },
+    daysSinceStart () {
+      const oneDay = 24 * 60 * 60 * 1000 // hours*minutes*seconds*milliseconds
+      const startDay = new Date(2019, 1, 27)
+      const today = new Date()
+      const daysSinceStart = Math.round(Math.abs((startDay.getTime() - today.getTime()) / oneDay))
+      return daysSinceStart
+    },
+    averageScrollPerDay () {
+      return this.currentDistance / this.daysSinceStart
+    },
+    distanceLeftInKm () {
+      return this.fullDistance - this.currentDistance
+    },
+    eta () {
+      const daysToGo = this.distanceLeftInKm / this.averageScrollPerDay
+      const targetDate = new Date()
+      targetDate.setDate(targetDate.getDate() + daysToGo)
+      const dd = targetDate.getDate()
+      const yyyy = targetDate.getFullYear()
+      const month = ['Jan', 'Feb', 'March', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][targetDate.getMonth()]
+      function nth (dd) {
+        if (dd > 3 && dd < 21) { return 'th' }
+        switch (dd % 10) {
+          case 1: return 'st'
+          case 2: return 'nd'
+          case 3: return 'rd'
+          default: return 'th'
+        }
+      }
+      return month + ' ' + dd + nth(dd) + ', ' + yyyy
     }
   },
   methods: {
@@ -152,8 +195,23 @@ export default {
     }
   },
   watch: {
-    currentDistance (val) {
+    currentDistance (val, oldVal) {
       this.moveAlongLine(val)
+      if (!this.lastScrollTime) {
+        this.lastScrollTime = new Date()
+        this.oldVal = val
+      } else {
+        const currentTime = new Date()
+        const diffInSec = Math.abs(this.lastScrollTime.getTime() - currentTime.getTime()) / 1000
+        const diffInHours = Math.abs(this.lastScrollTime.getTime() - currentTime.getTime()) / 36e5
+        if (diffInSec >= 1.5) {
+          const distanceInKm = val - this.oldVal
+          const speed = distanceInKm / diffInHours
+          this.lastScrollTime = new Date()
+          this.oldVal = val
+          this.currentSpeed = speed.toFixed(1)
+        }
+      }
     },
     showAbout (val) {
       if (val) {
@@ -161,6 +219,13 @@ export default {
       } else {
         this.flyTo(this.coordinates, 1.5)
       }
+    },
+    averageScrollPerDay (val) {
+      const metres = val * 1000
+      this.$store.commit('averageScrollPerDay', metres)
+    },
+    eta (val) {
+      this.$store.commit('eta', val)
     }
   },
   sockets: {
@@ -178,8 +243,16 @@ export default {
       }, 3000)
     }
   },
-  created () {
-    this.mapbox = Mapbox
+  mounted () {
+    const vm = this
+    vm.mapbox = Mapbox
+    vm.windowHeight = window.innerHeight
+    console.log(window.innerHeight)
+    window.addEventListener('resize', () => { vm.windowHeight = window.innerHeight })
+    if (window.innerWidth <= 768) {
+      vm.$store.commit('noEvents', false)
+      vm.$store.commit('introAnimationDone', true)
+    }
   }
 }
 </script>

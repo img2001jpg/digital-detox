@@ -2,7 +2,9 @@ export const state = () => ({
   mapLoaded: false,
   noEvents: true,
   showAbout: false,
-  introAnimationDone: false
+  introAnimationDone: false,
+  averageScrollPerDay: null,
+  eta: null
 })
 
 export const mutations = {
@@ -16,7 +18,13 @@ export const mutations = {
     state.showAbout = !state.showAbout
   },
   introAnimationDone (state) {
-    state.introAnimationDone = state
+    state.introAnimationDone = true
+  },
+  averageScrollPerDay (state, val) {
+    state.averageScrollPerDay = val
+  },
+  eta (state, val) {
+    state.eta = val
   }
 }
 

@@ -7,11 +7,11 @@
       </section>
       <section>
         <h3 class="script indent">When did you start?</h3>
-        <p>My journey began on Feb 27th, 2019. On average, I currently scroll 444 m/day which means I will arrive on Jan 15th, 2025.<br>Feel free to contact me if you have any other questions.</p>
+        <p>My journey began on Feb 27th, 2019. On average, I currently scroll {{ $store.state.averageScrollPerDay.toFixed(0) }} m/day which means I will arrive on {{ $store.state.eta }}. Feel free to <a href="mailto:mail@marco.land">contact me</a> if you have any other questions.</p>
       </section>
-      <section>
+      <!-- <section>
         <h3 class="script indent">Get a postcard!</h3>
-      </section>
+      </section> -->
       <section>
         <h3 class="script indent">Technologies</h3>
         <p>
@@ -25,8 +25,9 @@
           Marco Land<br>
           Genter Strasse 4<br>
           13353 Berlin Germany<br>
+          <a href="mailto:mail@marco.land">mail@marco.land</a><br>
           <br>
-          Read more <a href="https://marco.land/imprint" target="_blank">here</a>
+          <a href="https://marco.land/imprint" target="_blank">Data Privacy</a>
         </p>
       </section>
     </div>

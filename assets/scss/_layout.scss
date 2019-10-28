@@ -13,6 +13,10 @@ html, body {
   right: 1rem;
   z-index: 99;
   cursor: pointer;
+  svg {
+    width: 1.5rem;
+    height: auto;
+  }
 }
 
 #about-container {
@@ -33,5 +37,20 @@ html, body {
     section {
       margin-bottom: 5rem;
     }
+  }
+}
+
+.speed-meter {
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  text-shadow: 0px 3px 3px black;
+  z-index: 99;
+  pointer-events: none;
+  font-size: 2rem;
+  @media screen and (min-width: 768px) {
+    font-size: 2.7vw; 
   }
 }

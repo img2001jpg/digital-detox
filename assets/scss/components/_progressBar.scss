@@ -10,7 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 21px;
+  font-size: 1rem;
   transform: translateY(100%);
   transition: transform $baseTransitionSpeed;
   &.visible {
@@ -24,9 +24,8 @@
     top: 0;
     left: 0;
     height: 100%;
-    background-color: #6FBD1B;
-    mix-blend-mode: multiply;
-    background: linear-gradient(-90deg, #6fbd1b, #5c9d16);
+    background-color: #fff;
+    mix-blend-mode: difference;
     // border: 5px solid white;
     // box-sizing: border-box;
   }
