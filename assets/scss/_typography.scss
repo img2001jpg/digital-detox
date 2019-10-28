@@ -1,0 +1,92 @@
+// @import url("//hello.myfonts.net/count/3a5743");
+// @font-face {
+//   font-family: 'HelveticaNeueLTPro-Lt';
+//   src: url('../fonts/3A5743_0_0.eot');
+//   src: url('../fonts/3A5743_0_0.eot?#iefix') format('embedded-opentype'),
+//        url('../fonts/3A5743_0_0.woff2') format('woff2'),
+//        url('../fonts/3A5743_0_0.woff') format('woff'),
+//        url('../fonts/3A5743_0_0.ttf') format('truetype');
+// }
+// @font-face {
+//   font-family: 'HelveticaNeueLTPro-Roman';
+//   src: url('../fonts/3A5743_1_0.eot');
+//   src: url('../fonts/3A5743_1_0.eot?#iefix') format('embedded-opentype'),
+//        url('../fonts/3A5743_1_0.woff2') format('woff2'),
+//        url('../fonts/3A5743_1_0.woff') format('woff'),
+//        url('../fonts/3A5743_1_0.ttf') format('truetype');
+// }  
+// @font-face {
+//   font-family: 'HelveticaNeueLTPro-BlkEx';
+//   src: url('../fonts/3A5743_2_0.eot');
+//   src: url('../fonts/3A5743_2_0.eot?#iefix') format('embedded-opentype'),
+//        url('../fonts/3A5743_2_0.woff2') format('woff2'),
+//        url('../fonts/3A5743_2_0.woff') format('woff'),
+//        url('../fonts/3A5743_2_0.ttf') format('truetype');
+// }
+
+@import url('//hello.myfonts.net/count/3a6cea');
+@font-face {
+  font-family: 'SackersItalianScriptStd';
+  src: url('../fonts/3A6CEA_0_0.eot');
+  src: url('../fonts/3A6CEA_0_0.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/3A6CEA_0_0.woff2') format('woff2'),
+       url('../fonts/3A6CEA_0_0.woff') format('woff'),
+       url('../fonts/3A6CEA_0_0.ttf') format('truetype');
+}
+ 
+ 
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  font-family: 'Times New Roman', serif;
+  line-height: 135%;
+  letter-spacing: 0.01em;
+  color: white;
+}
+
+.script {
+  font-family: 'SackersItalianScriptStd';
+}
+
+h1 {
+  font-size: 6vw;
+  text-align: center;
+  line-height: 1.1;
+  text-shadow: 0px 5px 3px black;
+}
+h2 {
+  font-size: 1vw;
+  letter-spacing: -0.01em;
+  text-align: center;
+  line-height: 1;
+  margin-top: -1.5em;
+  text-shadow: 0px 5px 3px black;
+}
+
+h3 {
+  font-size: 6vw;
+  margin: 0 0 0 0;
+  line-height: 1;
+}
+
+.indent {
+  transform: translateX(-0.3em);
+}
+
+.indent-small {
+  transform: translateX(-0.2em);
+}
+
+a, a:link, a:visited, a:active, a:hover {
+  color: inherit;
+}
+
+p {
+  font-size: 21px;
+  line-height: 1.25;
+  max-width: 40em;
+}

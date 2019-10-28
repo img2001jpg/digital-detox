@@ -1,0 +1,29 @@
+.logo-wrapper {
+  position: fixed;
+  width: 100%;
+  z-index: 3;
+  top: 10px;
+  left: 0;
+  pointer-events: none;
+  text-align: center;
+  h1 {
+    transition: font-size $baseTransitionSpeed, transform $baseTransitionSpeed;
+    // transition-delay: 1000ms;
+    transform: translate(-0.1em, 0);
+  }
+  h2 {
+    transition: all $baseTransitionSpeed;
+    // transition-delay: 1000ms;
+    opacity: 0;
+  }
+  &.show-intro h1, &.show-intro h2 {
+    transform: translate(-0.1em, 30vh);
+    opacity: 1;
+  }
+  &.show-intro h1 {
+    font-size: 18vw;
+  }
+  &.show-intro h2 {
+    font-size: 2.5vw;
+  }
+}

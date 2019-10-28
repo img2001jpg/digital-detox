@@ -1,0 +1,16 @@
+// General
+@import 'reset';
+@import 'variables';
+@import 'mixins';
+@import 'typography';
+@import 'transitions';
+@import 'figures';
+@import 'layout';
+
+//Static
+@import 'static/menu';
+
+// Components
+@import 'components/logo';
+@import 'components/mapContainer';
+@import 'components/progressBar';

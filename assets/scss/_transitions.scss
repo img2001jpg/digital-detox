@@ -1,0 +1,21 @@
+.fade-enter-active, .fade-leave-active {
+  transition: opacity $baseTransitionSpeed;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translate(-50%, -50%) scale(.8);
+    opacity: 0;
+  }
+  25% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.2);
+    opacity: 0;
+  }
+}

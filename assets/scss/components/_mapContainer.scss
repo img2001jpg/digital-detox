@@ -1,0 +1,55 @@
+$markerDiameter: 15px;
+$circleDiameter: 30px;
+$cirleWidth: 4px;
+
+#map {
+  width: 100vw;
+  height: 100vh;
+  // overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity $baseTransitionSpeed;
+  pointer-events: all;
+  &.visible {
+    opacity: 1;
+  }
+}
+.mapboxgl-ctrl-logo, .mapboxgl-ctrl-attrib-inner {
+  display: none !important;
+}
+.mapboxgl-marker {
+  svg { display: none !important; }
+  &:before {
+    content: '';
+    width: $markerDiameter;
+    height: $markerDiameter;
+    border-radius: 100%;
+    background: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 4px 3px black;
+  }
+  &:after {
+    box-shadow: 0px 4px 3px black;
+    content: '';
+    width: $circleDiameter;
+    height: $circleDiameter;
+    border-radius: 100%;
+    border: $cirleWidth solid white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%);
+  }
+}
+.is-scrolling .mapboxgl-marker {
+  &:after {
+    opacity: 1;
+    animation: pulse linear infinite 2s;
+  }
+}

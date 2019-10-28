@@ -1,0 +1,37 @@
+html, body {
+  background: #000;
+  overflow: hidden;
+}
+
+.no-events {
+  pointer-events: none !important;
+}
+
+#about {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 99;
+  cursor: pointer;
+}
+
+#about-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 98;
+  text-shadow: 0px 5px 3px black;
+  .inner {
+    min-height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 2vw;
+    section {
+      margin-bottom: 5rem;
+    }
+  }
+}

@@ -12,8 +12,16 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.3.6",
+    "@turf/turf": "^5.1.6",
+    "leaflet": "^1.5.1",
+    "map-promisified": "^0.4.0",
+    "mapbox-gl": "^1.5.0",
+    "node-sass": "^4.13.0",
     "nuxt": "^2.0.0",
-    "@nuxtjs/axios": "^5.3.6"
+    "sass-loader": "^8.0.0",
+    "vue-mapbox": "^0.4.1",
+    "vue-socket.io": "^3.0.7"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^1.0.1",
