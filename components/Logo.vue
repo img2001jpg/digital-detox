@@ -1,10 +1,5 @@
 <template>
-  <div
-    class="logo-wrapper"
-    :class="{
-      'show-intro': !$store.state.introAnimationDone && !$store.state.showAbout
-    }"
-  >
+  <div class="logo-wrapper">
     <h1 class="script">
       Digital Detox
     </h1>

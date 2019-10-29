@@ -165,7 +165,7 @@ export default {
     onMapLoaded (event) {
       this.$store.commit('mapLoaded')
       this.mapActions = event.component.actions
-      this.flyTo(this.coordinates, 0.5)
+      this.flyTo(this.coordinates, 1)
       const vm = this
       event.map.on('movestart', function () {
         if (vm.isTransitioning) {
@@ -185,7 +185,7 @@ export default {
         zoom: 16,
         bearing: 0,
         pitch: 0,
-        curve: 1,
+        curve: 0.7,
         speed: duration
       })
     },
