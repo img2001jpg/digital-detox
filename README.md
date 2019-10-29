@@ -18,5 +18,3 @@ $ yarn start
 # generate static project
 $ yarn generate
 ```
-
-©2019 [https://marco.land](Marco Land)
