@@ -42,7 +42,7 @@ export default {
     },
     weatherIcon () {
       if (!this.weather) { return }
-      return `http://openweathermap.org/img/wn/${this.weather.weather[0].icon}@2x.png`
+      return `https://openweathermap.org/img/wn/${this.weather.weather[0].icon}@2x.png`
     }
   },
   mounted () {
