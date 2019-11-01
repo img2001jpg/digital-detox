@@ -1,0 +1,12 @@
+#weather {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 99;
+  line-height: 0.5;
+  .weather-icon {
+    height: 2.5em;
+    margin-right: -.5em;
+    margin-left: -.5em;
+  }
+}

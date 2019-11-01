@@ -13,6 +13,10 @@
     <AboutIcon @click.native="$store.commit('showAbout')" v-if="$store.state.introAnimationDone"/>
     <transition name="fade" mode="out-in">
       <AboutContainer v-if="$store.state.showAbout && !$store.state.noEvents"/>
+      <Weather
+        v-if="!$store.state.showAbout && !$store.state.noEvents"
+        :coordinates="coordinates"
+      />
     </transition>
     <MglMap
       v-if="connected"
