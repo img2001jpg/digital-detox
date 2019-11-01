@@ -28,7 +28,7 @@ html, body {
   overflow-x: hidden;
   overflow-y: auto;
   z-index: 98;
-  text-shadow: 0px 5px 3px black;
+  text-shadow: $baseShadow;
   .inner {
     min-height: 100%;
     width: 100%;

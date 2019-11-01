@@ -33,7 +33,7 @@ html, body {
 h1 {
   text-align: center;
   line-height: 1.1;
-  text-shadow: 0px 5px 3px black;
+  text-shadow: $baseShadow;
   font-size: 15.5vw;
   @media screen and (min-width: 768px) {
     font-size: 6vw;
@@ -45,7 +45,7 @@ h2 {
   text-align: center;
   line-height: 1;
   margin-top: -1.5em;
-  text-shadow: 0px 5px 3px black;
+  text-shadow: $baseShadow;
 }
 
 h3 {
