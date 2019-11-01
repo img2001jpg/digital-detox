@@ -9,6 +9,8 @@
   </div>
 </template>
 <script>
+import axios from 'axios'
+
 export default {
   props: ['coordinates'],
   name: 'Weather',
@@ -19,7 +21,7 @@ export default {
   },
   methods: {
     async fetchWeather  () {
-      const weather = await this.$axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${this.coordinates[1]}&lon=${this.coordinates[0]}&appid=3ad20da63cd74faf6d6a420ec20bb9a9&units=metric`)
+      const weather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${this.coordinates[1]}&lon=${this.coordinates[0]}&appid=3ad20da63cd74faf6d6a420ec20bb9a9&units=metric`)
       this.weather = weather.data
     }
   },
