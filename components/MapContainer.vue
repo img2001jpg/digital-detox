@@ -251,7 +251,6 @@ export default {
     const vm = this
     vm.mapbox = Mapbox
     vm.windowHeight = window.innerHeight
-    console.log(window.innerHeight)
     window.addEventListener('resize', () => { vm.windowHeight = window.innerHeight })
     if (window.innerWidth <= 768) {
       vm.$store.commit('noEvents', false)
