@@ -31,10 +31,10 @@ $cirleWidth: 4px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    box-shadow: 0px 4px 3px black;
+    box-shadow: $baseShadow;
   }
   &:after {
-    box-shadow: 0px 4px 3px black;
+    box-shadow: $baseShadow;
     content: '';
     width: $circleDiameter;
     height: $circleDiameter;
