@@ -1,4 +1,4 @@
-# :palm_tree: Digital Detox
+# :syringe:  Digital Detox
 
 Frontend for [https://digitaldetox.marco.land](https://digitaldetox.marco.land). Built with [Nuxt.js](https://nuxtjs.org).
 
