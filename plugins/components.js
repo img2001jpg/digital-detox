@@ -5,9 +5,11 @@ import Logo from '../components/Logo.vue'
 import MapContainer from '../components/MapContainer.vue'
 import Weather from '../components/Weather.vue'
 
+const isDev = process.env.NODE_ENV !== 'production'
+
 Vue.use(new VueSocketIO({
-  debug: false,
-  connection: 'https://digitaldetox.marco.land'
+  debug: isDev,
+  connection: 'https://digitaldetox.socket.marco.land'
 }))
 
 Vue.component('MapContainer', MapContainer)

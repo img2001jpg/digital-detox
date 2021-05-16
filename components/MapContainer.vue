@@ -10,9 +10,9 @@
       'no-events': $store.state.noEvents
     }"
   >
-    <AboutIcon @click.native="$store.commit('showAbout')" v-if="$store.state.introAnimationDone"/>
+    <AboutIcon v-if="$store.state.introAnimationDone" @click.native="$store.commit('showAbout')" />
     <transition name="fade" mode="out-in">
-      <AboutContainer v-if="$store.state.showAbout && !$store.state.noEvents"/>
+      <AboutContainer v-if="$store.state.showAbout && !$store.state.noEvents" />
       <Weather
         v-if="!$store.state.showAbout && !$store.state.noEvents"
         :coordinates="coordinates"
@@ -21,11 +21,11 @@
     <MglMap
       v-if="connected"
       ref="map"
-      :accessToken="accessToken"
-      :mapStyle="mapStyle"
+      :access-token="accessToken"
+      :map-style="mapStyle"
       :zoom="zoom"
-      :minZoom="minZoom"
-      :maxZoom="maxZoom"
+      :min-zoom="minZoom"
+      :max-zoom="maxZoom"
       :pitch="pitch"
       :bearing="bearing"
       :interactive="interactive"
@@ -33,25 +33,26 @@
       @load="onMapLoaded"
     >
       <MglGeojsonLayer
-        :sourceId="geoJsonSource.data.id"
+        :source-id="geoJsonSource.data.id"
         :source="geoJsonSource"
-        layerId="somethingSomething"
+        layer-id="somethingSomething"
         :layer="geoJsonLayer"
       />
       <MglMarker
         :coordinates.sync="coordinates"
         color="blue"
-      >
-      </MglMarker>
+      />
       <transition name="fade">
-        <div class="speed-meter" v-if="isScrolling && currentSpeed > 0 && !$store.state.showAbout && !$store.state.noEvents">{{ currentSpeed }} km/h</div>
+        <div v-if="isScrolling && currentSpeed > 0 && !$store.state.showAbout && !$store.state.noEvents" class="speed-meter">
+          {{ currentSpeed }} km/h
+        </div>
       </transition>
       <ProgressBar
         :class="{
           'visible': !$store.state.noEvents && !$store.state.showAbout
         }"
-        :currentDistance="currentDistance"
-        :fullDistance="fullDistance"
+        :current-distance="currentDistance"
+        :full-distance="fullDistance"
       />
     </MglMap>
   </div>
@@ -165,39 +166,6 @@ export default {
       return month + ' ' + dd + nth(dd) + ', ' + yyyy
     }
   },
-  methods: {
-    onMapLoaded (event) {
-      this.$store.commit('mapLoaded')
-      this.mapActions = event.component.actions
-      this.flyTo(this.coordinates, 1)
-      const vm = this
-      event.map.on('movestart', function () {
-        if (vm.isTransitioning) {
-          vm.$store.commit('noEvents', true)
-        }
-      })
-      event.map.on('moveend', function () {
-        vm.$store.commit('noEvents', false)
-        vm.$store.commit('introAnimationDone', true)
-        vm.isTransitioning = false
-      })
-    },
-    flyTo (coordinates, duration) {
-      this.isTransitioning = true
-      this.mapActions.flyTo({
-        center: coordinates,
-        zoom: 16,
-        bearing: 0,
-        pitch: 0,
-        curve: 0.7,
-        speed: duration
-      })
-    },
-    moveAlongLine (distance) {
-      const along = turf.along(this.lineStr, distance)
-      this.coordinates = along.geometry.coordinates.reverse()
-    }
-  },
   watch: {
     currentDistance (val, oldVal) {
       this.moveAlongLine(val)
@@ -232,6 +200,49 @@ export default {
       this.$store.commit('eta', val)
     }
   },
+  mounted () {
+    const vm = this
+    vm.mapbox = Mapbox
+    vm.windowHeight = window.innerHeight
+    window.addEventListener('resize', () => { vm.windowHeight = window.innerHeight })
+    if (window.innerWidth <= 768) {
+      vm.$store.commit('noEvents', false)
+      vm.$store.commit('introAnimationDone', true)
+    }
+  },
+  methods: {
+    onMapLoaded (event) {
+      this.$store.commit('mapLoaded')
+      this.mapActions = event.component.actions
+      this.flyTo(this.coordinates, 1)
+      const vm = this
+      event.map.on('movestart', function () {
+        if (vm.isTransitioning) {
+          vm.$store.commit('noEvents', true)
+        }
+      })
+      event.map.on('moveend', function () {
+        vm.$store.commit('noEvents', false)
+        vm.$store.commit('introAnimationDone', true)
+        vm.isTransitioning = false
+      })
+    },
+    flyTo (coordinates, duration) {
+      this.isTransitioning = true
+      this.mapActions.flyTo({
+        center: coordinates,
+        zoom: 16,
+        bearing: 0,
+        pitch: 0,
+        curve: 0.7,
+        speed: duration
+      })
+    },
+    moveAlongLine (distance) {
+      const along = turf.along(this.lineStr, distance)
+      this.coordinates = along.geometry.coordinates.reverse()
+    }
+  },
   sockets: {
     init (val) {
       this.currentDistance = val
@@ -245,16 +256,6 @@ export default {
       vm.timer = setTimeout(() => {
         vm.isScrolling = false
       }, 3000)
-    }
-  },
-  mounted () {
-    const vm = this
-    vm.mapbox = Mapbox
-    vm.windowHeight = window.innerHeight
-    window.addEventListener('resize', () => { vm.windowHeight = window.innerHeight })
-    if (window.innerWidth <= 768) {
-      vm.$store.commit('noEvents', false)
-      vm.$store.commit('introAnimationDone', true)
     }
   }
 }

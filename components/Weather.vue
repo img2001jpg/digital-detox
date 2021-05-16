@@ -3,7 +3,7 @@
     <transition name="fade" mode="out-in">
       <span v-if="weather">
         {{ city }}, {{ country }}<br>
-        <img class="weather-icon" :src="weatherIcon" /> {{ temperature }}° C, {{ weatherDescription }}
+        <img class="weather-icon" :src="weatherIcon"> {{ temperature }}° C, {{ weatherDescription }}
       </span>
     </transition>
   </div>
@@ -12,17 +12,11 @@
 import axios from 'axios'
 
 export default {
-  props: ['coordinates'],
   name: 'Weather',
+  props: ['coordinates'],
   data () {
     return {
       weather: null
-    }
-  },
-  methods: {
-    async fetchWeather  () {
-      const weather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${this.coordinates[1]}&lon=${this.coordinates[0]}&appid=3ad20da63cd74faf6d6a420ec20bb9a9&units=metric`)
-      this.weather = weather.data
     }
   },
   computed: {
@@ -49,6 +43,12 @@ export default {
   },
   mounted () {
     this.fetchWeather()
+  },
+  methods: {
+    async fetchWeather  () {
+      const weather = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${this.coordinates[1]}&lon=${this.coordinates[0]}&appid=3ad20da63cd74faf6d6a420ec20bb9a9&units=metric`)
+      this.weather = weather.data
+    }
   }
 }
 </script>
